@@ -39,7 +39,7 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-Issuer.discover("http://localhost:3000/oidc").then(function (oidcIssuer) {
+Issuer.discover("http://localhost:8000/oidc").then(function (oidcIssuer) {
   var client = new oidcIssuer.Client({
     client_id: process.env.ClientId,
     client_secret: process.env.ClientSecret,
@@ -84,18 +84,10 @@ app.get("/", (req, res) => {
   res.send(" <a href='/login'>Log In with OAuth 2.0 Provider </a>");
 });
 app.get("/user", (req, res) => {
-  res.header("Content-Type", "application/json");
-
-  res.send(
-    JSON.stringify(
-      { tokenset: req.session.tokenSet, userinfo: req.session.userinfo },
-      null,
-      2
-    )
-  );
+  res.json({ status: "ok", tokenset: req.session.tokenSet, userinfo: req.session.userinfo });
 });
 
 const httpServer = http.createServer(app);
 httpServer.listen(8080, () => {
-  console.log(`Http Server Running on port 3004`);
+  console.log(`Http Server Running on port 8080`);
 });
