@@ -1,5 +1,5 @@
 {
-  "name": "OIDC-Client",
+  "name": "oidc-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
